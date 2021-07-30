@@ -350,3 +350,8 @@ const store = configureStore({
 * initialState => it represent the state for the first time
 *it help to write immutable updates an easier way 
     * ses a library called Immer inside. Immer uses a special JS tool called a Proxy to wrap the data you provide, and lets you write code that "mutates" that wrapped data. But, Immer tracks all the changes you've tried to make, and then uses that list of changes to return a safely immutably updated value, as if you'd written all the immutable update logic by hand.
+
+## thunk
+is specific kind of redux function that can contain async logic
+    * An inside thunk function, which gets dispatch and getState as arguments
+    * The outside creator function, which creates and returns the thunk function
