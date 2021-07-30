@@ -323,3 +323,30 @@ the store will run the reducer function nd save the new state value inside
 # selector
 function to get piece of information from the store state value / it help avoid repeating logic
 
+-------------------
+* Redux allows store setup to be customized with different kinds of plugins ("middleware" and "enhancers"). configureStore automatically adds several middleware to the store setup by default to provide a good developer experience, and also sets up the store so that the Redux DevTools Extension can inspect its contents.
+
+# Redux Slices
+A "slice" is a collection of Redux reducer logic and actions for a single feature in your app
+    , typically defined together in a single file. The name comes from splitting up the root Redux state object into multiple "slices" of state
+## combineReducers 
+It accepts an object full of slice reducers as its argument, and returns a function that calls each slice reducer whenever an action is dispatched. The result from each slice reducer are all combined together into a single object as the final result.
+```javascript=
+const rootReducer = combineReducers({
+  users: usersReducer,
+  posts: postsReducer,
+  comments: commentsReducer
+})
+```
+```javascript=
+const store = configureStore({
+  reducer: rootReducer
+})
+```
+
+### Creating Slice Reducers and Actions
+* createSlice =>generating action type strings, action creator functions, and action objects. (automatically generates action creators with the same names as the reducer functions we wrote.)
+* name => option is used as the first part of each action type, and the key name of each reducer function is used as the second part. ```name:'counter'``` the ```'increment'```reducer function generated an action type of {type:'counter/increment'}
+* initialState => it represent the state for the first time
+*it help to write immutable updates an easier way 
+    * ses a library called Immer inside. Immer uses a special JS tool called a Proxy to wrap the data you provide, and lets you write code that "mutates" that wrapped data. But, Immer tracks all the changes you've tried to make, and then uses that list of changes to return a safely immutably updated value, as if you'd written all the immutable update logic by hand.
