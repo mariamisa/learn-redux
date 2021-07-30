@@ -1,67 +1,36 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-  decrement,
-  increment,
-  incrementByAmount,
-  incrementAsync,
-  incrementIfOdd,
-  selectCount,
-} from './counterSlice';
-import styles from './Counter.module.css';
+import React, { useState } from "react";
+
+// action to dispatch
+import { decrement, increment } from "./counterSlice";
+import { useSelector, useDispatch } from "react-redux";
+import styles from "./Counter.module.css";
 
 export function Counter() {
-  const count = useSelector(selectCount);
+  //use selector to get data from store
+  const count = useSelector((state) => state.counter.value);
+  // dispatch to send action to the reducer store
   const dispatch = useDispatch();
-  const [incrementAmount, setIncrementAmount] = useState('2');
-
-  const incrementValue = Number(incrementAmount) || 0;
-
   return (
     <div>
-      <div className={styles.row}>
+      <div>
         <button
-          className={styles.button}
-          aria-label="Decrement value"
-          onClick={() => dispatch(decrement())}
-        >
-          -
-        </button>
-        <span className={styles.value}>{count}</span>
-        <button
-          className={styles.button}
           aria-label="Increment value"
           onClick={() => dispatch(increment())}
         >
-          +
+          Increment
         </button>
-      </div>
-      <div className={styles.row}>
-        <input
-          className={styles.textbox}
-          aria-label="Set increment amount"
-          value={incrementAmount}
-          onChange={(e) => setIncrementAmount(e.target.value)}
-        />
+        <span>{count}</span>
         <button
-          className={styles.button}
-          onClick={() => dispatch(incrementByAmount(incrementValue))}
+          aria-label="Decrement value"
+          onClick={() => dispatch(decrement())}
         >
-          Add Amount
-        </button>
-        <button
-          className={styles.asyncButton}
-          onClick={() => dispatch(incrementAsync(incrementValue))}
-        >
-          Add Async
-        </button>
-        <button
-          className={styles.button}
-          onClick={() => dispatch(incrementIfOdd(incrementValue))}
-        >
-          Add If Odd
+          Decrement
         </button>
       </div>
     </div>
   );
 }
+
+// The corresponding Redux action will be dispatched to the store
+// The counter slice reducer will see the actions and update its state
+// The <Counter> component will see the new state value from the store and re-render itself with the new dat
