@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 
 // action to dispatch
-import { decrement, increment } from "./counterSlice";
+import { decrement, increment, incrementByAmount } from "./counterSlice";
 import { useSelector, useDispatch } from "react-redux";
-import styles from "./Counter.module.css";
 
 export function Counter() {
   //use selector to get data from store
   const count = useSelector((state) => state.counter.value);
   // dispatch to send action to the reducer store
   const dispatch = useDispatch();
+  // state to save input value
+  const [amount, setAmount] = useState(0);
   return (
     <div>
       <div>
@@ -25,6 +26,16 @@ export function Counter() {
           onClick={() => dispatch(decrement())}
         >
           Decrement
+        </button>
+        <input
+          value={amount}
+          onChange={({ target }) => setAmount(target.value)}
+        />
+        <button
+          aria-label="add by amount"
+          onClick={() => dispatch(incrementByAmount(+amount))}
+        >
+          add by amount
         </button>
       </div>
     </div>

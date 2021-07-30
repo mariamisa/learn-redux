@@ -1,7 +1,20 @@
 # redux
-state managment
+Redux is a pattern and library for managing and updating application state, using events called "actions". It serves as a centralized store for state that needs to be used across your entire application, with rules ensuring that the state can only be updated in a predictable fashion.
 
+Redux is more useful when:
 
+* You have large amounts of application state that are needed in many places in the app
+* The app state is updated frequently over time
+* The logic to update that state may be complex
+* The app has a medium or large-sized codebase, and might be worked on by many people
+
+### Redux libraries and tool
+1. React-Redux (to connect the redux wih component)
+    let react component interact with redux store by reading pieces of state and dispatching action and update the state
+2. React toolkit (create store and logic)
+    when write redux logic 
+
+-------------------------
 state will display inside the view when state change by action it will be re-render and update the view (as sycle)
 
 * State – the current data used in the app
@@ -13,7 +26,7 @@ state will display inside the view when state change by action it will be re-ren
 
 2. Action 
     * type=>evert action must have a type property with string value this describe the action
-    * payload=>include any information related to the a ction (for example todo input text)
+    * payload=>include any information related to the a action (for example todo input text)
     * When an action is generated and notifies other parts of the application, we say that the action is dispatched.
 
     example actions:
@@ -23,7 +36,7 @@ state will display inside the view when state change by action it will be re-ren
               type: 'todos/removeAll'
             }
         ```
-        here we dont have to add payload becouse no additional information is needed
+        here we don't have to add payload because no additional information is needed
         2.  “Remove the ‘Pack snacks’ todo”:
 
         ```javascript=
@@ -293,3 +306,20 @@ export function Counter() {
   )
 }
 ```
+
+
+# store
+the current redux app state lives in an object called the store
+to get the current value state ```store.getState()```
+# dispatch
+the only way to update the state by call ``` store.dispatch()``` and pass the action object 
+the store will run the reducer function nd save the new state value inside 
+
+    ```javascript=
+    // dispatch this action to reducer and will update the value of state
+    store.dispatch({type:'counter/increment}) 
+    ```
+
+# selector
+function to get piece of information from the store state value / it help avoid repeating logic
+
