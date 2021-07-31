@@ -242,6 +242,8 @@ redux uses special object called the store , the store act as a container for st
 --------------
 #### provider 
 make redux store available to te rest of app
+* We've seen that our components can use the useSelector and useDispatch hooks to talk to the Redux store. But, since we didn't import the store, how do those hooks know what Redux store to talk to?
+
 ```javascript=
 import React from 'react'
 import ReactDOM from 'react-dom'
