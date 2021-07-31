@@ -1,6 +1,20 @@
-// A mock function to mimic making an async request for data
-export function fetchCount(amount = 1) {
-  return new Promise((resolve) =>
-    setTimeout(() => resolve({ data: amount }), 500)
-  );
-}
+//(thunk to create async logic code its implement by default to configure store)
+import Axios from "axios";
+import { userLoaded } from "./counterSlice";
+
+// the outside "thunk creator" function
+const fetchUserById = (userId) => {
+  // the inside thunk function
+  return async (dispatch, getState) => {
+    try {
+      // make an async call in the thunk
+      const user = await Axios(`https://randomuser.me/api/?id=${userId}`);
+      // dispatch an action when we get the response back
+      dispatch(userLoaded(user.data.results[0].name.first));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export default fetchUserById;

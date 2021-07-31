@@ -7,11 +7,12 @@ import {
   incrementByAmount,
   incrementAsync,
 } from "./counterSlice";
+import fetchUserById from './counterAPI'
 import { useSelector, useDispatch } from "react-redux";
 
 export function Counter() {
   //use selector to get data from store
-  const count = useSelector((state) => state.counter.value);
+  const count = useSelector((state) => state.counter);
   // dispatch to send action to the reducer store
   const dispatch = useDispatch();
   // state to save input value
@@ -25,7 +26,8 @@ export function Counter() {
         >
           Increment
         </button>
-        <span>{count}</span>
+        <span>{count.value}</span>
+        <span>{count.user}user</span>
         <button
           aria-label="Decrement value"
           onClick={() => dispatch(decrement())}
@@ -47,6 +49,12 @@ export function Counter() {
           onClick={() => dispatch(incrementAsync(+amount))}
         >
           incrementAsync
+        </button>
+        <button
+          aria-label="fetchUserById"
+          onClick={() => dispatch(fetchUserById(2))}
+        >
+          get user
         </button>
         
       </div>
