@@ -312,6 +312,7 @@ export function Counter() {
 the current redux app state lives in an object called the store
 to get the current value state ```store.getState()```
 # dispatch
+
 the only way to update the state by call ``` store.dispatch()``` and pass the action object 
 the store will run the reducer function nd save the new state value inside 
 
@@ -319,9 +320,23 @@ the store will run the reducer function nd save the new state value inside
     // dispatch this action to reducer and will update the value of state
     store.dispatch({type:'counter/increment}) 
     ```
+### useDispatch
+if we had access to store we could dispatch action using action creator like store.dispatch(increment()) 
+* if we don't have access to store we need some way to have access to dispatch method , useDispatch hook does that for us 
+``` const dispatch = useDispatch() ``` // the actual dispatch store method
 
 # selector
 function to get piece of information from the store state value / it help avoid repeating logic
+
+### useSelector
+Our components can't talk to the Redux store directly, because we're not allowed to import it into component files. But, useSelector takes care of talking to the Redux store behind the scenes for us. If we pass in a selector function, it calls someSelector(store.getState()) for us, and returns the result.
+* So, we can get the current store counter value by doing:
+```javascript=
+const count = useSelector(selectCount)
+
+```
+
+* any time action has been dispatched ans redux store has been updated it make sure to re-run selector function , if the selector return different value that the last time it will make sure our component re-render with the new value
 
 -------------------
 * Redux allows store setup to be customized with different kinds of plugins ("middleware" and "enhancers"). configureStore automatically adds several middleware to the store setup by default to provide a good developer experience, and also sets up the store so that the Redux DevTools Extension can inspect its contents.
@@ -355,3 +370,11 @@ const store = configureStore({
 is specific kind of redux function that can contain async logic
     * An inside thunk function, which gets dispatch and getState as arguments
     * The outside creator function, which creates and returns the thunk function
+
+## middleware
+The Redux store can be extended with "middleware", which are a kind of add-on or plugin that can add extra abilities. The most common reason to use middleware is to let you write code that can have async logic, but still talk to the store at the same time. They can also modify the store so that we can call dispatch() and pass in values that are not plain action objects, like functions or Promises.
+The Redux Thunk middleware modifies the store to let you pass functions into dispatch.
+
+
+### component state and forms
+* we don't have to store every thing inside the redux just we can useState for it (the global state inside the redux store but the local state inside the state component) 

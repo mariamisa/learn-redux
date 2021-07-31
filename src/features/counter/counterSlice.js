@@ -38,6 +38,11 @@ export const incrementAsync = (amount) => (dispatch) => {
     dispatch(incrementByAmount(amount));
   }, 1000);
 };
+
+// to access specific data from the store
+export const selectCount = state => state.counter
+
+
 // Action creators are generated for each case reducer function
 
 export const { increment, decrement, incrementByAmount, userLoaded } =

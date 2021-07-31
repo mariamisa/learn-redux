@@ -6,13 +6,14 @@ import {
   increment,
   incrementByAmount,
   incrementAsync,
+  selectCount
 } from "./counterSlice";
 import fetchUserById from './counterAPI'
 import { useSelector, useDispatch } from "react-redux";
 
 export function Counter() {
   //use selector to get data from store
-  const count = useSelector((state) => state.counter);
+  const count = useSelector(selectCount);
   // dispatch to send action to the reducer store
   const dispatch = useDispatch();
   // state to save input value
